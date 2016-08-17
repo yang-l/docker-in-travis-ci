@@ -1,7 +1,10 @@
 sudo: required
 
 services:
-    - docker
+  - docker
 
 install:
-    - docker build -t docker-build .
+  - docker build -t docker-build .
+
+script:
+  - docker run -i --rm docker-build /bin/bash --version

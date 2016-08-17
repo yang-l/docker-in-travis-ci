@@ -2,7 +2,13 @@ FROM ubuntu:xenial
 
 RUN set -xe \
     && apt-get update && apt-get install -y \
-       locale \
+       binutils \
+       curl \
+       git \
+       sudo \
+       uuid-runtime \
+       wget \
+       xz-utils \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
