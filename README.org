@@ -1,0 +1,6 @@
+#+TITLE: Base Docker Image
+#+OPTIONS: toc:2 num:nil
+
+[[https://travis-ci.org/yang-l/docker-in-travis-ci][file:https://travis-ci.org/yang-l/docker-in-travis-ci.svg?branch=master]]
+
+This repository provides Dockerfile to build images used by other projects.
