@@ -10,7 +10,7 @@ branches:
   - master
 
 install:
-  - docker build -t docker-build .
+  - docker build -t x86_64 - < Dockerfile.dev.x86_64.ubuntu.xenial
 
 script:
-  - docker run -i --rm docker-build /bin/bash --version
+  - docker run -i --rm x86_64 /bin/bash --version
