@@ -3,6 +3,8 @@ FROM x86_64
 
 WORKDIR /home
 
+RUN curl -sL https://get.docker.com/builds/Linux/x86_64/docker-latest.tgz | tar -xzf - -C /usr/bin/ --strip=1
+
 COPY qemu-bin/qemu-aarch64-static /usr/bin/
 
 COPY entrypoint.sh /home/

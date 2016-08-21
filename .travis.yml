@@ -29,3 +29,6 @@ script:
   - docker run -i --rm --privileged x86_64-docker "/bin/bash --version"
   - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles x86_64-docker "/srv/dockerfiles/qemu-bin/qemu-x86_64-static -version"
   - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles x86_64-docker "/srv/dockerfiles/qemu-bin/qemu-aarch64-static -version"
+  - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker -v"
+  - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker version"
+  - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker info"
