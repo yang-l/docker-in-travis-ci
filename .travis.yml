@@ -24,3 +24,5 @@ install:
 script:
   - docker run -i --rm --privileged x86_64
   - docker run -i --rm --privileged x86_64 "/bin/bash --version"
+  - docker run -i --rm --privileged x86_64 "./dockerfile/qemu-bin/qemu-x86_64-static -version"
+  - docker run -i --rm --privileged x86_64 "./dockerfile/qemu-bin/qemu-aarch64-static -version"
