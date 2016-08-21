@@ -28,16 +28,3 @@ RUN locale-gen en_US.UTF-8 \
     && /usr/sbin/update-locale LANG=en_US.UTF-8
 
 ENV LC_ALL en_US.UTF-8
-
-WORKDIR /home
-
-COPY qemu-bin/qemu-aarch64-static /usr/bin/
-
-COPY entrypoint.sh /home/
-
-# Add the dockerfile git repo into the docker image
-COPY ./ dockerfile/
-
-ENTRYPOINT ["/home/entrypoint.sh"]
-
-CMD ["bash --version"]

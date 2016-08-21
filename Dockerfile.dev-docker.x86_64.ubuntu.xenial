@@ -1,0 +1,14 @@
+# must run "docker build -t x86_64 -f Dockerfile.dev.x86_64.ubuntu.xenial ." first locally
+FROM x86_64
+
+WORKDIR /home
+
+COPY qemu-bin/qemu-aarch64-static /usr/bin/
+
+COPY entrypoint.sh /home/
+
+VOLUME /srv/dockerfiles/
+
+ENTRYPOINT ["/home/entrypoint.sh"]
+
+CMD ["bash --version"]
