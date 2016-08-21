@@ -9,8 +9,18 @@ branches:
   only:
   - master
 
+## submodule
+git:
+    submodules: false
+
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+##
+
 install:
   - docker build -t x86_64 -f Dockerfile.dev.x86_64.ubuntu.xenial .
 
 script:
-  - docker run -i --rm x86_64 /bin/bash --version
+  - docker run -i --rm --privileged x86_64
+  - docker run -i --rm --privileged x86_64 "/bin/bash --version"
