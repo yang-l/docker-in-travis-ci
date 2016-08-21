@@ -4,3 +4,5 @@
 [[https://travis-ci.org/yang-l/docker-in-travis-ci][file:https://travis-ci.org/yang-l/docker-in-travis-ci.svg?branch=master]]
 
 This repository provides Dockerfile to build images used by other projects.
+
+Note any dockerfiles here are not for general usages, as they are just providing any development packages and/or experimential features for other repositories.
