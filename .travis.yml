@@ -17,6 +17,9 @@ before_install:
   - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
   - git submodule update --init --recursive
 ##
+  # setup binfmt_misc
+  - sudo cp qemu-bin/qemu-aarch64-static /usr/bin
+  - echo ':aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7:\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff:/usr/bin/qemu-aarch64-static:' | sudo tee /proc/sys/fs/binfmt_misc/register
 
 install:
   - docker build -t x86_64 -f Dockerfile.dev.x86_64.ubuntu.xenial .
@@ -28,6 +31,11 @@ script:
   - docker run -i --rm --privileged x86_64-docker "/bin/bash --version"
   - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles x86_64-docker "/srv/dockerfiles/qemu-bin/qemu-x86_64-static -version"
   - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles x86_64-docker "/srv/dockerfiles/qemu-bin/qemu-aarch64-static -version"
-  - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker -v"
-  - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker version"
-  - docker run -i --rm --privileged -v $(pwd):/srv/dockerfiles -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker info"
+  # docker inside docker test
+  - docker run -i --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker -v"
+  - docker run -i --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker version"
+  - docker run -i --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock x86_64-docker "docker info"
+  # arm on x86 docker test
+  - uname -a
+  - docker run -i --rm x86_64 uname -a
+  - docker run -i --rm -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static aarch64/debian uname -a
