@@ -4,6 +4,7 @@ RUN set -xe \
     && apt-get update && apt-get install -y \
        make \
        gcc-5 \
+       g++-5 \
        gcc-5-aarch64-linux-gnu \
        g++-5-aarch64-linux-gnu \
        kmod \
@@ -19,6 +20,7 @@ RUN set -xe \
        uuid-runtime \
        wget \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 50 \
+    && update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 50 \
     && update-alternatives --install /usr/bin/aarch64-linux-gnu-gcc aarch64-linux-gnu-gcc /usr/bin/aarch64-linux-gnu-gcc-5 50 \
     && update-alternatives --install /usr/bin/aarch64-linux-gnu-g++ aarch64-linux-gnu-g++ /usr/bin/aarch64-linux-gnu-g++-5 50 \
     && apt-get clean \
